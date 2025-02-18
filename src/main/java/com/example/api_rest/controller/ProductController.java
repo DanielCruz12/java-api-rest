@@ -12,7 +12,6 @@ import com.example.api_rest.entities.Product;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;;
 
 @RestController
 @RequestMapping("/products")
@@ -32,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@RequestParam Long id) {
+    public Product getProductById(@PathVariable Long id) {
         Product newProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontro el Id: " + id));
         return newProduct;
@@ -47,7 +46,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public Product deleteProduct(@RequestParam Long id) {
+    public Product deleteProduct(@PathVariable Long id) {
         Product productdeleted = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontro el Id: " + id));
         productRepository.delete(productdeleted);
